@@ -1,5 +1,4 @@
 import csv
-import json
 
 with open("soccer_players.csv", newline="") as csvfile:
 	teamreader = csv.reader(csvfile, delimiter="|")
