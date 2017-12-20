@@ -1,7 +1,7 @@
 import csv
 
 # open 'soccer_players.csv'
-def import_players( file, new_line, delimiter ):
+def get_player_list( file, new_line, delimiter ):
     with open( file, newline=new_line ) as csvfile:
         file_reader = csv.DictReader( csvfile, delimiter=delimiter )
         players = list( file_reader )
@@ -11,7 +11,7 @@ def import_players( file, new_line, delimiter ):
 
 
 # sort players into experienced and inexperienced
-def sort_players( players ):
+def dist_players( players ):
     experienced_players = []
     inexperienced_players = []
 
@@ -27,9 +27,9 @@ def sort_players( players ):
 
 
 # assign players to teams based on index
-def assign_players( players, team_list ):
+def player_teams( players, team_list ):
     index = 0
-    sorted_players = sort_players( players )
+    sorted_players = dist_players( players )
     player_list = []
     teams = []
 
@@ -81,13 +81,13 @@ def write_teams( teams ):
         file.write( "\n" )
 
 
- 
+ # block to stop from running when inported
 if __name__ == "__main__":
-    imported_players = import_players( 'soccer_players.csv', '', ',' )
+    imported_players = get_player_list( 'soccer_players.csv', '', ',' )
 
     team_list = { 'Sharks': [], 'Dragons': [], 'Raptors': [] }
 
-    assigned_players = assign_players( imported_players, team_list )
+    assigned_players = player_teams( imported_players, team_list )
 
     teams = make_teams( team_list, assigned_players )
 
